@@ -1,0 +1,59 @@
+client/
+├── public/                      # Static assets served directly (favicon, manifests)
+├── src/
+│   ├── assets/                  # Shared global styles and media files
+│   │   ├── images/              # Logos, banners, generic image placeholders
+│   │   └── styles/              # global.css or tailwind base files
+│   │
+│   ├── components/              # REUSABLE UI BLOCKS (Presentational components)
+│   │   ├── common/              # App framework structure elements
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Button.jsx       # Standard atomic UI button component
+│   │   │   └── Loading.jsx      # Reusable fetch/skeleton indicator
+│   │   ├── product/             # Component blocks mapping to inventory
+│   │   │   ├── ProductCard.jsx
+│   │   │   ├── ProductGrid.jsx
+│   │   │   ├── FilterSidebar.jsx
+│   │   │   ├── SizeSelector.jsx
+│   │   │   └── ColorPicker.jsx
+│   │   ├── cart/                # Dynamic transactional components
+│   │   │   ├── CartItem.jsx
+│   │   │   └── OrderSummary.jsx
+│   │   └── admin/               # Panel exclusive UI controls
+│   │       ├── AdminSidebar.jsx
+│   │       ├── DataTable.jsx    # Table blueprint for sorting lists
+│   │       └── StatCard.jsx     # Analytical dashboards block indicators
+│   │
+│   ├── pages/                   # VIEWS AND ROUTE ENTRY SCREENS
+│   │   ├── storefront/          # Public-facing marketplace
+│   │   │   ├── Home.jsx
+│   │   │   ├── Shop.jsx
+│   │   │   ├── ProductDetails.jsx
+│   │   │   └── CartPage.jsx
+│   │   ├── interactive/         # Logged-in profile utilities
+│   │   │   ├── Measurements.jsx # Sizing guide and dimensional inputs
+│   │   │   ├── UserProfile.jsx
+│   │   │   └── Checkout.jsx
+│   │   ├── admin/               # Internal back-office controls
+│   │   │   ├── AdminDashboard.jsx
+│   │   │   ├── AdminInventory.jsx
+│   │   │   └── AdminOrders.jsx  # Fulfillment & tailored size review
+│   │   ├── auth/                # Security barriers
+│   │   │   ├── Login.jsx
+│   │   │   └── Register.jsx
+│   │   └── index.js             # Barrel entry matching components to App.jsx
+│   │
+│   ├── services/                # BACKEND DATA COUPLING LAYER (Fetch/Axios)
+│   │   ├── api.js               # Base client config, headers & JWT interceptors
+│   │   ├── authService.js       # Tokens storage, login, user sync mutations
+│   │   ├── productService.js   # Fetches catalogs, custom filtering queries
+│   │   ├── measurementService.js# Saves/updates tailor-fit data matrix values
+│   │   ├── cartService.js       # LocalStorage or Remote database sync pipelines
+│   │   └── adminService.js      # Status changes, stock entries updates logic
+│   │
+│   ├── App.jsx                  # Root configuration router & layout maps
+│   └── main.jsx                 # Global script execution node bundle trigger
+│
+├── package.json                 # Dependency version array manifest (Vite, React Router)
+└── vite.config.js               # Framework build settings configuration
