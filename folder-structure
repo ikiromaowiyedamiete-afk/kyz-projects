@@ -1,0 +1,16 @@
+client/
+├── src/
+│   ├── assets/          # Images, logos, global styles
+│   ├── components/      # Reusable UI (Buttons, Navbar, Card)
+│   ├── pages/           # Page views (Home.jsx, AdminDashboard.jsx)
+│   ├── services/        # API calls (api.js using fetch or axios)
+│   ├── App.jsx          # Main routing & layout wrapper
+│   └── main.jsx         # Entry point
+
+folders & pages 
+assests folder: images folder, logos folder , global styles page 
+components folder: (Reuseable UI) Buttons file, Navbar file, Card file, Header File , Footer file 
+pages folder: Home page , about page , measurements page , productdetails and listing page etc
+Services folder: Api calls
+App.jsx file Main routing & layout wrapper 
+main.jsx Entry point 
