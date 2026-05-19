@@ -1,0 +1,17 @@
+src/components/
+├── common/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   ├── Button.jsx
+│   └── ProtectedRoute.jsx
+├── product/
+│   ├── ProductCard.jsx
+│   ├── ProductGrid.jsx
+│   └── FilterSidebar.jsx
+├── cart/
+│   ├── CartItem.jsx
+│   └── OrderSummary.jsx
+└── admin/
+    ├── AdminSidebar.jsx
+    ├── DataTable.jsx
+    └── StatCard.jsx
