@@ -1,188 +1,122 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from './assets/vite.svg'
+import heroImg from './assets/hero.png'
+import './App.css'
 
-// --- Components Imports ---
-import Navbar from './components/common/Navbar';
-import Footer from './components/common/Footer';
-import AdminSidebar from './components/admin/AdminSidebar';
+function App() {
+  const [count, setCount] = useState(0)
 
-// --- Consolidated Pages Imports (Via Barrel File) ---
-import {
-  Home,
-  Shop,
-  ProductDetails,
-  CartPage,
-  Measurements,
-  UserProfile,
-  Checkout,
-  AdminDashboard,
-  AdminInventory,
-  AdminOrders,
-  Login,
-  Register
-} from './pages';
-
-// ==========================================
-// 1. LAYOUT WRAPPERS
-// ==========================================
-
-/**
- * Public Front-End Layout
- * Standard wrapper for customer-facing store views.
- */
-const BaseLayout = () => (
-  <div style={styles.baseLayout}>
-    <Navbar />
-    <main style={styles.mainContent}>
-      <Outlet />
-    </main>
-    <Footer />
-  </div>
-);
-
-/**
- * Administrative Back-Office Layout
- * Splitted layout featuring a persistent sidebar dashboard navigation.
- */
-const AdminLayout = () => (
-  <div style={styles.adminLayout}>
-    <AdminSidebar />
-    <div style={styles.adminContentWrapper}>
-      <header style={styles.adminHeader}>
-        <h2>kyz-threads | Control Panel</h2>
-      </header>
-      <main style={styles.adminMain}>
-        <Outlet />
-      </main>
-    </div>
-  </div>
-);
-
-// ==========================================
-// 2. AUTHENTICATION GUARD (MOCK)
-// ==========================================
-// Protects administrative routes from public access.
-const ProtectedRoute = ({ children, isAdminRequired = false }) => {
-  const token = localStorage.getItem('kyz_token');
-  const userRole = localStorage.getItem('kyz_role'); // e.g., 'admin' or 'customer'
-
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (isAdminRequired && userRole !== 'admin') {
-    return <Navigate to="/" replace />;
-  }
-
-  return children;
-};
-
-// ==========================================
-// 3. FALLBACK 404 COMPONENT
-// ==========================================
-const NotFound = () => (
-  <div style={styles.notFound}>
-    <h2>404 - Thread Not Found</h2>
-    <p>The page you are trying to access doesn't exist.</p>
-  </div>
-);
-
-// ==========================================
-// 4. MAIN ROUTING ARCHITECTURE
-// ==========================================
-export default function App() {
   return (
-    <Router>
-      <Routes>
-        
-        {/* --- Public Storefront Routes --- */}
-        <Route path="/" element={<BaseLayout />}>
-          <Route index element={<Home />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="product/:id" element={<ProductDetails />} />
-          <Route path="cart" element={<CartPage />} />
-          
-          {/* Secured Interactive Customer Routes */}
-          <Route path="measurements" element={
-            <ProtectedRoute><Measurements /></ProtectedRoute>
-          } />
-          <Route path="profile" element={
-            <ProtectedRoute><UserProfile /></ProtectedRoute>
-          } />
-          <Route path="checkout" element={
-            <ProtectedRoute><Checkout /></ProtectedRoute>
-          } />
-        </Route>
+    <>
+      <section id="center">
+        <div className="hero">
+          <img src={heroImg} className="base" width="170" height="179" alt="" />
+          <img src={reactLogo} className="framework" alt="React logo" />
+          <img src={viteLogo} className="vite" alt="Vite logo" />
+        </div>
+        <div>
+          <h1>Get started</h1>
+          <p>
+            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+          </p>
+        </div>
+        <button
+          type="button"
+          className="counter"
+          onClick={() => setCount((count) => count + 1)}
+        >
+          Count is {count}
+        </button>
+      </section>
 
-        {/* --- Authentication Routes (Isolated) --- */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      <div className="ticks"></div>
 
-        {/* --- Back-Office Admin Routes (Protected) --- */}
-        <Route path="/admin" element={
-          <ProtectedRoute isAdminRequired={true}>
-            <AdminLayout />
-          </ProtectedRoute>
-        }>
-          <Route index element={<AdminDashboard />} />
-          <Route path="inventory" element={<AdminInventory />} />
-          <Route path="orders" element={<AdminOrders />} />
-        </Route>
+      <section id="next-steps">
+        <div id="docs">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#documentation-icon"></use>
+          </svg>
+          <h2>Documentation</h2>
+          <p>Your questions, answered</p>
+          <ul>
+            <li>
+              <a href="https://vite.dev/" target="_blank">
+                <img className="logo" src={viteLogo} alt="" />
+                Explore Vite
+              </a>
+            </li>
+            <li>
+              <a href="https://react.dev/" target="_blank">
+                <img className="button-icon" src={reactLogo} alt="" />
+                Learn more
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="social">
+          <svg className="icon" role="presentation" aria-hidden="true">
+            <use href="/icons.svg#social-icon"></use>
+          </svg>
+          <h2>Connect with us</h2>
+          <p>Join the Vite community</p>
+          <ul>
+            <li>
+              <a href="https://github.com/vitejs/vite" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#github-icon"></use>
+                </svg>
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a href="https://chat.vite.dev/" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#discord-icon"></use>
+                </svg>
+                Discord
+              </a>
+            </li>
+            <li>
+              <a href="https://x.com/vite_js" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#x-icon"></use>
+                </svg>
+                X.com
+              </a>
+            </li>
+            <li>
+              <a href="https://bsky.app/profile/vite.dev" target="_blank">
+                <svg
+                  className="button-icon"
+                  role="presentation"
+                  aria-hidden="true"
+                >
+                  <use href="/icons.svg#bluesky-icon"></use>
+                </svg>
+                Bluesky
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
 
-        {/* --- Global Catch-All 404 --- */}
-        <Route path="*" element={<NotFound />} />
-
-      </Routes>
-    </Router>
-  );
+      <div className="ticks"></div>
+      <section id="spacer"></section>
+    </>
+  )
 }
 
-// ==========================================
-// 5. LAYOUT STYLES
-// ==========================================
-const styles = {
-  // Storefront Styles
-  baseLayout: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
-  mainContent: {
-    flex: 1,
-    width: '100%',
-    maxWidth: '1400px',
-    margin: '0 auto',
-    padding: '40px 20px',
-    boxSizing: 'border-box',
-  },
-  
-  // Admin Layout Styles
-  adminLayout: {
-    display: 'flex',
-    minHeight: '100vh',
-    backgroundColor: '#f4f6f9',
-    fontFamily: 'Segoe UI, Roboto, sans-serif',
-  },
-  adminContentWrapper: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  adminHeader: {
-    backgroundColor: '#ffffff',
-    padding: '15px 30px',
-    borderBottom: '1px solid #e0e0e0',
-  },
-  adminMain: {
-    flex: 1,
-    padding: '30px',
-    boxSizing: 'border-box',
-  },
-  
-  // Utility View Styles
-  notFound: {
-    textAlign: 'center',
-    marginTop: '10%',
-    fontFamily: 'sans-serif',
-  }
-};
+export default App
